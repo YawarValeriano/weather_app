@@ -58,6 +58,46 @@ class HistoryViewController: UIViewController {
 
 //MARK: Table extension
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    private func showDeleteAlert(searchItem: Search, index: Int) {
+        let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete the item from history?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler:  { action in
+            
+            CoreDataManager.shared.deleteItem(item: searchItem) { result in
+                switch result {
+                case .failure(let error):
+                    self.showError(error: error.localizedDescription)
+                    break
+                case .success(()):
+                    self.historyList.remove(at: index)
+                    self.searchHistoryTable.reloadData()
+                    break
+                }
+            }
+            
+            
+            self.navigationController?.popViewController(animated: true)
+                
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let item = self.historyList[indexPath.row]
+        let deleteAction = UIContextualAction(style: .destructive, title: "Remove", handler: {_,_,_ in
+            self.showDeleteAlert(searchItem: item, index: indexPath.row)
+        })
+        deleteAction.image = UIImage(systemName: "trash")
+        let actions = [
+            deleteAction
+        ]
+        return UISwipeActionsConfiguration(actions: actions)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         historyList.count
     }

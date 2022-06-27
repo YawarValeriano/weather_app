@@ -46,5 +46,16 @@ class CoreDataManager {
             completion(.failure(error))
         }
     }
+    
+    func deleteItem(item: Search, completion: @escaping(Result<Void, Error>) -> Void) {
+        let context = persistentContainer.viewContext
+        do {
+            context.delete(item)
+            try context.save()
+            completion(.success(()))
+        } catch (let error) {
+            completion(.failure(error))
+        }
+    }
 
 }
