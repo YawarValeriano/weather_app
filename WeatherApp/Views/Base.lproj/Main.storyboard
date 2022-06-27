@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Wt-XB-ufJ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--History-->
+        <scene sceneID="dcF-n2-st0">
+            <objects>
+                <viewController id="Sv9-3y-HOB" customClass="HistoryViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Tx-QP-dsX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Fzz-uC-c2K">
+                                <rect key="frame" x="10" y="88" width="394" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OTP-xi-98j"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OTP-xi-98j" firstAttribute="trailing" secondItem="Fzz-uC-c2K" secondAttribute="trailing" constant="10" id="1dc-V6-WNc"/>
+                            <constraint firstItem="Fzz-uC-c2K" firstAttribute="top" secondItem="OTP-xi-98j" secondAttribute="top" id="f7T-Jr-T3Q"/>
+                            <constraint firstItem="OTP-xi-98j" firstAttribute="bottom" secondItem="Fzz-uC-c2K" secondAttribute="bottom" id="o1b-hT-dgT"/>
+                            <constraint firstItem="Fzz-uC-c2K" firstAttribute="leading" secondItem="OTP-xi-98j" secondAttribute="leading" constant="10" id="qZg-ag-CQN"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="History" image="clock.arrow.circlepath" catalog="system" id="jeg-6e-2rK"/>
+                    <connections>
+                        <outlet property="searchHistoryTable" destination="Fzz-uC-c2K" id="kVx-0b-dpF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xxr-cl-1Se" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1842" y="199"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="h63-BK-WtQ">
+            <objects>
+                <viewController id="blW-7u-bfH" customClass="SearchViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GgN-fR-84x">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search City" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="je1-yn-FbM">
+                                <rect key="frame" x="10" y="93" width="394" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="god-Hk-7jf">
+                                <rect key="frame" x="10" y="149" width="394" height="659"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jg4-wi-jjU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="je1-yn-FbM" firstAttribute="leading" secondItem="Jg4-wi-jjU" secondAttribute="leading" constant="10" id="2Mw-gn-1NI"/>
+                            <constraint firstItem="god-Hk-7jf" firstAttribute="top" secondItem="je1-yn-FbM" secondAttribute="bottom" constant="5" id="81K-AJ-33W"/>
+                            <constraint firstAttribute="trailing" secondItem="je1-yn-FbM" secondAttribute="trailing" constant="10" id="SWs-w0-fWo"/>
+                            <constraint firstItem="je1-yn-FbM" firstAttribute="top" secondItem="Jg4-wi-jjU" secondAttribute="top" constant="5" id="ku0-4F-dtX"/>
+                            <constraint firstItem="Jg4-wi-jjU" firstAttribute="trailing" secondItem="god-Hk-7jf" secondAttribute="trailing" constant="10" id="tzJ-Zn-1Xb"/>
+                            <constraint firstItem="god-Hk-7jf" firstAttribute="leading" secondItem="Jg4-wi-jjU" secondAttribute="leading" constant="10" id="vJs-xA-LUk"/>
+                            <constraint firstItem="Jg4-wi-jjU" firstAttribute="bottom" secondItem="god-Hk-7jf" secondAttribute="bottom" constant="5" id="xjd-Bi-T58"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="iq4-wD-AqZ"/>
+                    <connections>
+                        <outlet property="bottomTableConstraint" destination="xjd-Bi-T58" id="Ob2-Et-Hsv"/>
+                        <outlet property="cityDataTableView" destination="god-Hk-7jf" id="O4n-hY-ns3"/>
+                        <outlet property="citySearchBar" destination="je1-yn-FbM" id="ize-1y-9DS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zhh-pX-aWP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1842.0289855072465" y="-485.49107142857139"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="IlU-ru-RM1">
+            <objects>
+                <tabBarController id="vaO-S8-0m3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="QMY-5t-2Vp"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iYx-LQ-5Vq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="blW-7u-bfH" kind="relationship" relationship="viewControllers" id="PVh-ea-4Rr"/>
+                        <segue destination="Sv9-3y-HOB" kind="relationship" relationship="viewControllers" id="sw1-qP-Esp"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Raf-rj-pmG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="954" y="-182"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ElM-Cr-g0C">
+            <objects>
+                <navigationController id="2Wt-XB-ufJ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Np7-JE-cez">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vaO-S8-0m3" kind="relationship" relationship="rootViewController" id="bZL-Vh-43y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fVO-Go-f08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="129" y="-182"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="clock.arrow.circlepath" catalog="system" width="128" height="110"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
