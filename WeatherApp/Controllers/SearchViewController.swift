@@ -99,22 +99,43 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let context = appDelegate.persistentContainer.viewContext
+        let cityData = searchResults[indexPath.row]
+        let fetchRequest = NSFetchRequest<Search>(entityName: "Search")
+        fetchRequest.predicate = NSPredicate(format: "cityId == %@", String(cityData.id))
+        CoreDataManager.shared.fetchSearchHistory(Search.self, request: fetchRequest, completion: { result in
+            switch result {
+            case .success(let data):
+                if data.isEmpty {
+                    self.saveInCoreDataAfterTap(cityId: String(cityData.id), searchString: "\(cityData.name), \(cityData.sys.country)")
+                }
+                self.showWeatherDetailViewController(String(cityData.id))
+                break
+            case .failure(let error):
+                self.showError(withDescription: error.localizedDescription)
+                break
+            }
+            
+        })
+        
+    }
+    
+    func showWeatherDetailViewController(_ cityId: String) {
+        guard let vc = UIStoryboard(name: WeatherDetailViewController.storyboardName, bundle: nil).instantiateViewController(withIdentifier: WeatherDetailViewController.identifier) as? WeatherDetailViewController else { return }
+        vc.cityIdString = String(cityId)
+        show(vc, sender: nil)
+    }
+    
+    func saveInCoreDataAfterTap(cityId: String, searchString: String) {
+        let context = CoreDataManager.shared.getContext()
         guard let entity = NSEntityDescription.entity(forEntityName: "Search", in: context) else { return }
         guard let city = NSManagedObject(entity: entity, insertInto: context) as? Search else { return }
 
-        let cityData = searchResults[indexPath.row]
 
-        city.cityId = String(cityData.id)
-        city.searchString = "\(cityData.name), \(cityData.sys.country)"
+        city.cityId = cityId
+        city.searchString = searchString
         city.createdAt = Date()
 
-        try? context.save()
-        
-        guard let vc = UIStoryboard(name: WeatherDetailViewController.storyboardName, bundle: nil).instantiateViewController(withIdentifier: WeatherDetailViewController.identifier) as? WeatherDetailViewController else { return }
-        vc.cityIdString = String(cityData.id)
-        navigationController?.pushViewController(vc, animated: true)
+        CoreDataManager.shared.saveContext()
     }
 
 }

@@ -30,16 +30,19 @@ class HistoryViewController: UIViewController {
     }
     
     private func loadDataFromCoreData() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let context = appDelegate.persistentContainer.viewContext
         let fetchContext = NSFetchRequest<Search>(entityName: "Search")
-        do {
-            let dbSearch = try context.fetch(fetchContext)
-            self.historyList = dbSearch
-            self.searchHistoryTable.reloadData()
-        } catch (let error) {
-            self.showError(error: error.localizedDescription)
-        }
+        CoreDataManager.shared.fetchSearchHistory(Search.self, request: fetchContext, completion: { result in
+            switch result {
+            case .success(let data):
+                self.historyList = data
+                self.searchHistoryTable.reloadData()
+                break
+            case .failure(let error):
+                self.showError(error: error.localizedDescription)
+                break
+            }
+        })
+        
     }
     
     private func showError(error: String) {
