@@ -61,7 +61,6 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func showDeleteAlert(searchItem: Search, index: Int) {
         let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete the item from history?", preferredStyle: .alert)
-        
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler:  { action in
             
             CoreDataManager.shared.deleteItem(item: searchItem) { result in
@@ -75,10 +74,7 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
                     break
                 }
             }
-            
-            
             self.navigationController?.popViewController(animated: true)
-                
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))

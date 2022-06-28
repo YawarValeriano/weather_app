@@ -13,9 +13,9 @@ class SearchViewController: UIViewController {
 
     @IBOutlet weak var cityDataTableView: UITableView!
     @IBOutlet weak var citySearchBar: UISearchBar!
-    
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
     var searchResults: [CityWeather] = []
+    var labelForNotFound = UILabel()
     
     //MARK: View lifecycle
     override func viewDidLoad() {
@@ -74,6 +74,19 @@ class SearchViewController: UIViewController {
     private func convertFahrenheitToCelcius(_ temperature: Double) -> String {
         let rounded = round((temperature - 273.15) * 10) / 10
         return "\(rounded) Cº"
+    }
+    
+    private func setNoResultLabel(_ text: String, hasData: Bool) {
+        if hasData {
+            labelForNotFound.removeFromSuperview()
+        } else {
+            view.addSubview(labelForNotFound)
+            labelForNotFound.text = "No results found for \"\(text)\""
+            labelForNotFound.textAlignment = .center
+            
+            labelForNotFound.frame = CGRect(x: 0, y: view.frame.height / 2, width: view.frame.width, height: 50)
+        }
+        
     }
 }
 
@@ -153,6 +166,7 @@ extension SearchViewController: UISearchBarDelegate {
             SVProgressHUD.dismiss()
             switch result {
             case .success(let data):
+                self.setNoResultLabel(cityText, hasData: !data.list.isEmpty)
                 self.searchResults = data.list
                 self.cityDataTableView.reloadData()
             case .failure(let error):
